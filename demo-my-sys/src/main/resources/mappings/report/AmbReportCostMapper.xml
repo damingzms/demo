@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AmbReportCost_Mapping">
+	<resultMap id="AmbReportCost" type="cn.sam.report.entity.AmbReport">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+		<result column="PAYER_ORG_ID" property="payerOrgId" jdbcType="VARCHAR" />
+		<result column="PAYER_ORG_NAME" property="payerOrgName" jdbcType="VARCHAR" />
+		<result column="PAYEE_ORG_ID" property="payeeOrgId" jdbcType="VARCHAR" />
+		<result column="PAYEE_ORG_NAME" property="payeeOrgName" jdbcType="VARCHAR" />
+		<result column="JAN" property="jan" jdbcType="DOUBLE" />
+		<result column="FEB" property="feb" jdbcType="DOUBLE" />
+		<result column="MAR" property="mar" jdbcType="DOUBLE" />
+		<result column="APR" property="apr" jdbcType="DOUBLE" />
+		<result column="MAY" property="may" jdbcType="DOUBLE" />
+		<result column="JUN" property="jun" jdbcType="DOUBLE" />
+		<result column="JUL" property="jul" jdbcType="DOUBLE" />
+		<result column="AUG" property="aug" jdbcType="DOUBLE" />
+		<result column="SEP" property="sep" jdbcType="DOUBLE" />
+		<result column="OCT" property="oct" jdbcType="DOUBLE" />
+		<result column="NOV" property="nov" jdbcType="DOUBLE" />
+		<result column="DEC" property="dec" jdbcType="DOUBLE" />
+	</resultMap>
+	
+<!-- 
+    <select id="findAll" resultMap="AmbReportCost" >
+        SELECT * FROM amb_report_cost
+    </select>
+
+	<select id="pageFindAmbReportCost" resultMap="AmbReportCost"
+		parameterType="com.hnair.amoeba.domain.report.AmbReportCost">
+		SELECT *
+		FROM amb_report_cost WHERE 1=1
+
+		<if test="projectName != null and projectName != ''">
+			AND PROJECT_NAME LIKE CONCAT(#{projectName}, '%')
+		</if>
+		<if test="payerOrgName != null and payerOrgName != ''">
+			AND PAYER_ORG_NAME LIKE CONCAT(#{payerOrgName}, '%')
+		</if>
+		<if test="payeeOrgName != null and payeeOrgName != ''">
+			AND PAYEE_ORG_NAME LIKE CONCAT(#{payeeOrgName}, '%')
+		</if>
+	</select>
+ -->
+ 
+    <select id="findAllCostWithOrgDimension" >
+        SELECT * FROM amb_report_cost
+    </select>
+</mapper>

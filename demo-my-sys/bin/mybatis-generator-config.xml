@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
+<generatorConfiguration>  
+    <!-- 引入配置文件 -->  
+    <properties resource="jdbc_gen.properties"/>  
+      
+    <!-- 指定数据连接驱动jar地址 -->
+	<classPathEntry
+		location="D:\workspace\repository\mysql\mysql-connector-java\5.1.20\mysql-connector-java-5.1.20.jar" />
+ 
+    <!-- 一个数据库一个context -->  
+    <context id="infoGuardian">  
+    <!-- RowBounds pagination -->
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 注释 -->  
+        <commentGenerator >  
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->  
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->  
+        </commentGenerator>  
+          
+        <!-- jdbc连接 -->  
+        <jdbcConnection driverClass="${jdbc.driverClassName}"  
+            connectionURL="${jdbc.url}" userId="${jdbc.username}"  
+            password="${jdbc.password}" />  
+          
+        <!-- 类型转换 -->  
+        <javaTypeResolver>  
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+          
+        <!-- 生成实体类地址 -->    
+        <javaModelGenerator targetPackage="cn.sam.test.entity"  
+            targetProject="MAVEN" >   
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->  
+            <!-- <property name="trimStrings" value="true"/> -->
+        </javaModelGenerator>  
+          
+        <!-- 生成mapxml文件 -->  
+        <sqlMapGenerator targetPackage="cn.sam.test.mapperings"  
+            targetProject="MAVEN" >  
+
+        </sqlMapGenerator>  
+          
+        <!-- 生成mapxml对应client，也就是接口dao -->      
+        <javaClientGenerator targetPackage="cn.sam.test.entity.mapper"  
+            targetProject="MAVEN" type="XMLMAPPER" >  
+
+        </javaClientGenerator>  
+        <!-- 
+        <table tableName="gs_order" domainObjectName="GsOrder" />
+		<table tableName="gs_order_pay" domainObjectName="GsOrderPay" />
+		<table tableName="gs_order_guest" domainObjectName="GsOrderGuest" />
+		
+		
+		<table tableName="inn" domainObjectName="Inn" />
+		<table tableName="inn_images" domainObjectName="InnImages" />
+		<table tableName="inn_place" domainObjectName="InnPlace" />
+		<table tableName="inn_review"  domainObjectName="InnReview" />
+		<table tableName="inn_facility"  domainObjectName="InnFacility" />
+		
+		
+		<table tableName="review_answer" domainObjectName="ReviewAnswer" />
+		<table tableName="review_base" domainObjectName="ReviewBase"/>
+		<table tableName="review_option" domainObjectName="ReviewOption" />
+		<table tableName="review_question" domainObjectName="ReviewQuestion" />
+		<table tableName="review_reply" domainObjectName="ReviewReply" />
+		
+		<table tableName="room_facility" domainObjectName="RoomFacility" />
+		<table tableName="room_rate" domainObjectName="RoomRate" />
+		<table tableName="room_rate_plan" domainObjectName="RoomRatePlan" />
+		<table tableName="room_status" domainObjectName="RoomStatus" />
+		<table tableName="room_type" domainObjectName="RoomType" />
+		<table tableName="room_type_has_inn" domainObjectName="RoomTypeHasInn" />
+		
+		<table tableName="sys_dict" domainObjectName="SysDict" />
+		<table tableName="sys_brand" domainObjectName="SysBrand" />
+		<table tableName="sys_city" domainObjectName="SysCity" />
+		<table tableName="sys_facility" domainObjectName="SysFacility" />
+		<table tableName="sys_user" domainObjectName="SysUser" />
+		<table tableName="sys_district" domainObjectName="SysDistrict" />
+		
+		
+		<table tableName="sys_role" domainObjectName="SysRole">
+					<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		 <table tableName="sys_manager_inn" domainObjectName="SysManagerInn">
+					<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		<table tableName="gs_order_logger" domainObjectName="GsOrderLogger">
+					<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		<table tableName="sys_manager" domainObjectName="SysManager">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+  
+  		<table tableName="asyn_result" domainObjectName="AsynResult" >
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+	    <table tableName="asyn_source" domainObjectName="AsynSource" >
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		<table tableName="sys_brand" domainObjectName="SysBrand">
+			<generatedKey column="id" sqlStatement="JDBC"
+				identity="true" />
+		</table>
+		
+		<table tableName="sys_city" domainObjectName="SysCity" ></table>
+		<table tableName="sys_district" domainObjectName="SysDistrict" ></table>
+		-->
+		<table tableName="sys_user" domainObjectName="SysUser">
+			<generatedKey column="id" sqlStatement="JDBC"
+				identity="true" />
+		</table>
+		<table tableName="sys_role" domainObjectName="SysRole">
+			<generatedKey column="id" sqlStatement="JDBC"
+				identity="true" />
+		</table>
+		
+    </context>  
+</generatorConfiguration>  
