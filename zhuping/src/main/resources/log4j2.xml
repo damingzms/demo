@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Don't forget to set system property
+-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+     to make all loggers asynchronous. -->
+<Configuration monitorInterval="30">
+    <Appenders>
+        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+        <RollingRandomAccessFile  name="rollingFile" fileName="logs/server.log"
+                                  filePattern="logs/$${date:yyyy-MM}/server-%d{MM-dd-yyyy}-%i.log.gz" immediateFlush="false" append="true">
+            <PatternLayout>
+                <Pattern>%X{host}H_N %d{yyyy-MM-dd HH:mm:ss.SSS Z} %p [%t] %c.%method %msg B_N%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile >
+        <RollingRandomAccessFile  name="debugRollingFile" fileName="logs/debug.log"
+                                  filePattern="logs/$${date:yyyy-MM}/debug-%d{MM-dd-yyyy}-%i.log.gz" immediateFlush="false" append="true">
+            <PatternLayout>
+                <Pattern>%X{host}H_N %d{yyyy-MM-dd HH:mm:ss.SSS Z} %p [%t] %c.%method %msg B_N%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile >
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout>
+				<Pattern>%X{host}H_N %d{yyyy-MM-dd HH:mm:ss.SSS Z} %p [%t] [%c.%method] %msg B_N%n</Pattern>
+			</PatternLayout>
+		</Console>
+    </Appenders>
+    <Loggers>
+  		<AsyncLogger name="com.biostime" level="info" includeLocation="true">
+            <AppenderRef ref="rollingFile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.hibernate" level="info" includeLocation="true">
+            <AppenderRef ref="debugRollingFile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.springframework.jdbc" level="info" includeLocation="true">
+            <AppenderRef ref="debugRollingFile"/>
+        </AsyncLogger>
+        <Root level="info" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <!-- Generating location information is an expensive operation and may impact performance. -->
+    </Loggers>
+</Configuration>
